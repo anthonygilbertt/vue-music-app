@@ -5,9 +5,19 @@
       <h1><router-link :to="{ name: 'Home' }">Home</router-link></h1>
       <div class="links">
         <!-- These are not router-links because they do not link to another component -->
-        <button @click="handleLogout">Logout</button>
-        <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
-        <router-link class="btn" :to="{ name: 'Signup' }">Sign Up</router-link>
+
+        <!-- Logged In -->
+        <div v-if="user">
+          <button @click="handleLogout">Logout</button>
+        </div>
+
+        <!-- Not Logged In-->
+        <div v-else>
+          <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
+          <router-link class="btn" :to="{ name: 'Signup' }"
+            >Sign Up</router-link
+          >
+        </div>
       </div>
     </nav>
   </div>
@@ -15,13 +25,29 @@
 
 
 <script>
+// Need to condirionally show the navbar buttons
+//
 import useLogout from "@/composables/useLogout.js";
+import getUser from "@/composables/getUser.js";
 import { useRouter } from "vue-router";
+import { ref } from "@vue/reactivity";
 
 export default {
   setup() {
     const { logout, error, isPending } = useLogout();
     const router = useRouter();
+
+    const isLoggedIn = ref(false);
+
+    const { user } = getUser();
+
+    if ((user.value = null)) {
+      isLoggedIn.value = false;
+    } else {
+      isLoggedIn.value = true;
+    }
+    // const navState = () => {
+    // };
 
     const handleLogout = async () => {
       await logout();
@@ -31,7 +57,7 @@ export default {
       console.log("user has been logged out");
     };
 
-    return { handleLogout };
+    return { handleLogout, user };
   },
 };
 </script>
