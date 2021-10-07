@@ -1,13 +1,10 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
-
-// Import the functions you need from the SDKs you need
+import "firebase/app";
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
     apiKey: "AIzaSyDMEotVZlsyXv2Ha2A9GlbBPErCmgTeK7c",
     authDomain: "vue-music-app-131d5.firebaseapp.com",
@@ -18,10 +15,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
 const projectFirestore = firebase.firestore()
 const projectAuth = firebase.auth()
 
-const timestamp = firebase.firebase.FieldValue.serverTimestamp
+const timestamp = firebase.firestore.FieldValue.serverTimestamp
 
-export default { projectAuth, projectAuth, timestamp }
+export { projectAuth, projectFirestore, timestamp }
