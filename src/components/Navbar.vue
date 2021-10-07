@@ -5,7 +5,7 @@
       <h1><router-link :to="{ name: 'Home' }">Home</router-link></h1>
       <div class="links">
         <!-- These are not router-links because they do not link to another component -->
-        <button>Logout</button>
+        <button @click="handleLogout">Logout</button>
         <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
         <router-link class="btn" :to="{ name: 'Signup' }">Sign Up</router-link>
       </div>
@@ -15,7 +15,25 @@
 
 
 <script>
-export default {};
+import useLogout from "@/composables/useLogout.js";
+import { useRouter } from "vue-router";
+
+export default {
+  setup() {
+    const { logout, error, isPending } = useLogout();
+    const router = useRouter();
+
+    const handleLogout = async () => {
+      await logout();
+      router.push({
+        name: "Login",
+      });
+      console.log("user has been logged out");
+    };
+
+    return { handleLogout };
+  },
+};
 </script>
 
 <style scoped>

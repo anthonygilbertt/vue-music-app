@@ -16,21 +16,22 @@
 <script>
 import useLogin from "@/composables/useLogin.js";
 import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const { error, login, isPending } = useLogin();
-    // TODO
-
-    // BUG When the login fails, the button displays 'Loading...'
 
     const email = ref("");
     const password = ref("");
+    const router = useRouter();
 
     const handleSubmit = async () => {
-      const res = await login(email.value, password.value);
+      await login(email.value, password.value);
+
       if (!error.value) {
-        clear();
+        router.push({ name: "Home" });
+
         console.log("user logged in");
       }
     };
