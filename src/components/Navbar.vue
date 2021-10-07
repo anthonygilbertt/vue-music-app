@@ -1,12 +1,47 @@
 <template>
-  <div>
-    <h3>Navbar Component</h3>
+  <div class="navbar">
+    <nav>
+      <img src="@/assets/mountain_PNG10.png" alt="" />
+      <h1><router-link :to="{ name: 'Home' }">Home</router-link></h1>
+      <div class="links">
+        <!-- These are not router-links because they do not link to another component -->
+        <button>Logout</button>
+        <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
+        <router-link class="btn" :to="{ name: 'Signup' }">Sign Up</router-link>
+      </div>
+    </nav>
   </div>
 </template>
+
 
 <script>
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.navbar {
+  padding: 16px 10px;
+  margin-bottom: 60px;
+  background: white;
+}
+nav {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+nav img {
+  max-height: 60px;
+}
+nav h1 {
+  margin-left: 20px;
+}
+nav .links {
+  margin-left: auto;
+}
+nav .links a,
+button {
+  margin-left: 16px;
+  font-size: 14px;
+}
 </style>
