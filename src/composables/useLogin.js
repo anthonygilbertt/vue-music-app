@@ -2,11 +2,13 @@ import { ref } from 'vue'
 import { projectAuth } from '../firebase/config'
 
 const error = ref(null)
+const isPending = ref(false)
 
 // This is the func we will use to sign ppl up
 const login = async(email, password) => {
     // we passed in the following arguments, because when we run the function
     // we need to pass in the values of these aruments.  
+    isPending.value = true
 
     //here we are re-setting the error value incase if they tried to interact with
     // the form previously and got an error
@@ -23,17 +25,19 @@ const login = async(email, password) => {
         error.value = null
 
         console.table(res.user);
+        isPending.value = false
         return res
 
     } catch (err) {
         console.log(err.message);
         error.value = "Incorrect login credentials"
+        isPending.value = true
     }
 
 }
 
 const useLogin = () => {
-    return { error, login }
+    return { error, login, isPending }
 }
 
 

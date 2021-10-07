@@ -7,7 +7,9 @@
     <input type="password" placeholder="Password" v-model="password" />
     <label for=""></label>
     <div class="error" v-if="error">{{ error }}</div>
-    <button>Login</button>
+    <button v-if="!isPending">Login</button>
+
+    <button v-if="isPending" disabled>Loading...</button>
   </form>
 </template>
 
@@ -17,7 +19,10 @@ import { ref } from "@vue/reactivity";
 
 export default {
   setup() {
-    const { error, login } = useLogin();
+    const { error, login, isPending } = useLogin();
+    // TODO
+
+    // BUG When the login fails, the button displays 'Loading...'
 
     const email = ref("");
     const password = ref("");
@@ -25,11 +30,12 @@ export default {
     const handleSubmit = async () => {
       const res = await login(email.value, password.value);
       if (!error.value) {
+        clear();
         console.log("user logged in");
       }
     };
 
-    return { email, password, handleSubmit, error };
+    return { email, password, handleSubmit, error, isPending };
   },
 };
 </script>

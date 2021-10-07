@@ -5,7 +5,10 @@ import Login from '../views/auth/Login.vue'
 const routes = [{
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        // beforeEnter: (to, from, next) => {
+        //     // ...
+        // }
     },
     {
         path: '/login',

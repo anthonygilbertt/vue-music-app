@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { projectAuth } from '../firebase/config'
 
 const error = ref(null)
+const isPending = ref(false)
 
 // This is the func we will use to sign ppl up
 const signup = async(email, password, displayName) => {
@@ -11,6 +12,8 @@ const signup = async(email, password, displayName) => {
     //here we are re-setting the error value incase if they tried to interact with
     // the form previously and got an error
     error.value = null
+    isPending.value = true
+
 
     try {
         const res = await projectAuth.createUserWithEmailAndPassword(email, password)
@@ -19,6 +22,7 @@ const signup = async(email, password, displayName) => {
         }
         await res.user.updateProfile({ displayName })
         error.value = null
+        isPending.value = false
 
         console.table(res.user);
         return res
@@ -26,14 +30,14 @@ const signup = async(email, password, displayName) => {
     } catch (err) {
         console.log(err.message);
         error.value = err.message
-
+        isPending.value = false
 
     }
 
 }
 
 const useSignup = () => {
-    return { error, signup }
+    return { error, signup, isPending }
 }
 
 
