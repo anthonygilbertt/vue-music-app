@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import { getStorage } from "firebase/storage";
 
 
 const firebaseConfig = {
@@ -22,4 +23,7 @@ const projectAuth = firebase.auth()
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp
 
-export { projectAuth, projectFirestore, timestamp }
+// Get a reference to the storage service, which is used to create references in your storage bucket
+const projectStorage = getStorage(firebaseApp);
+
+export { projectAuth, projectFirestore, timestamp, projectStorage }
