@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4>Create Playlist</h4>
-    <form @submit.prevent="handleCreatePlaylist">
+    <form @submit.prevent="handleFileUpload">
       <input
         type="text"
         required
@@ -25,6 +25,8 @@
 <script>
 import { ref } from "@vue/reactivity";
 import useCollection from "@/composables/useCollection.js";
+import useStorage from "@/composables/useStorage.js";
+import { uploadBytes } from "firebase/storage";
 
 export default {
   setup() {
@@ -34,14 +36,23 @@ export default {
     const file = ref(null);
     const fileError = ref(null);
 
+    const { firebaseFilePath, url, uploadImage } = useStorage();
     //  ------
-    const { addDoc, isPending } = useCollection();
+    // const { addDoc, isPending } = useCollection();
     //  ------
 
-    const handleCreatePlaylist = async (collection) => {
+    // const handleFileUpload = async (collection) => {
+    const handleFileUpload = async () => {
       // we don't want to submit the form if we don't have a value
       if (file.value) {
-        await console.log(title.value, description.value, file.value);
+        try {
+          console.log(title.value, description.value, file.value);
+          await uploadImage(file.value);
+          console.log("image uploaded, url: ", url.value);
+          // console.log(title.value, description.value, file.value);
+        } catch (error) {
+          console.log(error.message);
+        }
       }
     };
 
@@ -65,7 +76,7 @@ export default {
     return {
       title,
       description,
-      handleCreatePlaylist,
+      handleFileUpload,
       error,
       handleFileChange,
       fileError,

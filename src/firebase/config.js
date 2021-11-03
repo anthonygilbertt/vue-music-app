@@ -6,6 +6,9 @@ import 'firebase/compat/firestore';
 import { getStorage } from "firebase/storage";
 
 
+
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyDMEotVZlsyXv2Ha2A9GlbBPErCmgTeK7c",
     authDomain: "vue-music-app-131d5.firebaseapp.com",
@@ -16,7 +19,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+// const firebaseApp = initializeApp(firebaseConfig);
 
 const projectFirestore = firebase.firestore()
 const projectAuth = firebase.auth()
@@ -24,6 +28,8 @@ const projectAuth = firebase.auth()
 const timestamp = firebase.firestore.FieldValue.serverTimestamp
 
 // Get a reference to the storage service, which is used to create references in your storage bucket
-const projectStorage = getStorage(firebaseApp);
+// const projectStorage = getStorage(firebaseApp);
+const projectStorage = getStorage();
+
 
 export { projectAuth, projectFirestore, timestamp, projectStorage }

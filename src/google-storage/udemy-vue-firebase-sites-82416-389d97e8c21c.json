@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "udemy-vue-firebase-sites-82416",
+  "private_key_id": "389d97e8c21cca65c2cf2e6ab2f40ca0a3b00d42",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDX4r1u4q4pNN9i\nSMUaufR338TgffCii2NPRNL0SzxbMckEajYh+1mC2A4CgL3g6Er8aAOQNIpv8ycF\neuL3limrK62pHF7dug0qmjiAW2gVPIZX6J+d9z8bANOcGTQQek7ifYYJg39JYDIJ\n7naOH+34Xhph8cb42RmS3BjcK+4o4zf5wzFwXu1VoMl38bsScQYeQ6Y15GVP1Y+W\n3hjtVijnNWZBQItS1CpPhkLn8rdLB1Q+yLOp6EykDUdfOFq9N0w4WHMAbyJ2L4Lz\n9tcjXBStxZMzVOdBhZfdjZCvLAE0PX6AvkP3zGacaZA0NR/F3ZLQIY17ODD4++bR\nf/U/sx4HAgMBAAECggEABwmwxEMmi1haafFWX6MtSZUlbW4doKbro2NqfyVOv+hV\nFcxCnIP9rIrPlhxNVF4uR6E6cIKN+s1R+ddCO/EMxbREUo2GuDK/CCMD8YdJUtvo\nw0floDg1ufMicuXNcTYTiUWvT3MWfLVinDlGaya2UtD6ijPgGS+2qjd7pf3Wo0WJ\nqwzsRIsRQTBzdIM0LBRq9I6x1DS4NcoWX8gCnggV/ql62rOuXo34ro4hKd6m2b8z\nilhmIY5b7N0M9IQgIXhTY4I2zcgE9+Tls8KIsAMETDc0PsO02C+SNwlOZDvI9fc4\nDUWkdJtZxR4og0NTAIRlOgrSu5XvLeZvikk4Jag8UQKBgQD6sTrqb0Dol61Z40N0\nmNvk6/6S9QNIjUjwRaYQUt0bA0nsTRoi770QgQtgZmDkm7S2LurV6kckUS2Pqq7D\nR7NEp5107KqZZ9k2frh/ng3ss4XWdNBJ2MgXoY2LRUe5Il3li3pv9llkl2BZZzf3\ne7aOV3vtdy1dYdZTxDRke6R4dwKBgQDcdNsJTM4AZcwOltGKcKUfKZCTp577B2lQ\nq3V0YN+9GbkW1soThlZHVfYn0sVwn2FSNX+CVGPPkZqKw5DDbB1rN6FffkA4yRiU\nJxdYl/ka8vCKH4UUw9CvMRf+hOP1bCNLfn946TVfyMYobngA08fKIBeprCH6+Mm8\n5zh2PXN68QKBgGzUsfICWFhhOIV0Tt14WsX32a2spj9B7q84XU5q2sgWVmo6UqVm\nFFrs2qZ/64JzQjFxDsvNCBNxFmlvPK1UHDQq3AVdlPZCCh9JRglI8VyX1vtx/NaC\nQONZZBxY+Dkb/U1gjse6V7Z+rPpDAB31XBxRSGCfw1bt2WDGJcSVlKIjAoGBAMZm\nVAmWmX46Ht6yVHnmznOxEHAR1j3Mebcj11yZIkIouC4Zt1rC9zrT3egRA6dLiGZX\nxx0fnYPcYdyoC8wTrJYlRpGOKXXxZLFQTO5qNsFOCbQEkdwSLei8of9o0U65tznl\n6gqCtooxQkR4xn7YGWGKaEFGrH4VEFl1LZcbzqXBAoGBAN2N/8d8yEHa2K5akdqS\ngL1zwtSQdraFM3bRK6ow0Dt/Uhnuu+JznXbhVc/8948zWYoHjiVu7OBiE2sEyi51\nzkaauJeVOThZpOI1BibciMMP7azBBmSlzBpB3X1e2onFFSJKKHdEI0TZK+TpGYpk\ncvxBn4m6DbGAcLpPHiis6Iw2\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-63mww@udemy-vue-firebase-sites-82416.iam.gserviceaccount.com",
+  "client_id": "109769840326453546358",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-63mww%40udemy-vue-firebase-sites-82416.iam.gserviceaccount.com"
+}
