@@ -1,6 +1,6 @@
 import { ref as vref } from 'vue'
 import { ref } from "firebase/storage";
-import { getStorage, uploadBytes } from "firebase/storage";
+import { getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 import getUser from '@/composables/getUser.js'
 import { projectStorage } from '../firebase/config'
 
@@ -25,7 +25,11 @@ const useStorage = () => {
                 console.log('Uploaded a blob or file!');
             });
 
-            url.value = res.ref.getDownloadURL()
+            // url.value = res.ref.getDownloadURL()
+            url.value = getDownloadURL(ref(projectStorage, firebaseFilePath.value))
+                .then((url) => {
+                    console.log(url);
+                })
 
             if (!res) {
                 throw new Error('Could not login')
