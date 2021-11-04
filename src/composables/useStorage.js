@@ -4,6 +4,8 @@ import { getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 import getUser from '@/composables/getUser.js'
 import { projectStorage } from '../firebase/config'
 
+// TODO
+// Get the url back from the request
 
 const useStorage = () => {
     const error = vref(null)
@@ -21,15 +23,18 @@ const useStorage = () => {
 
         try {
             // const res = await storageRef.put(file)
-            const res = uploadBytes(storageRef, file).then((snapshot) => {
+            const res = await uploadBytes(storageRef, file).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
             });
 
-            // url.value = res.ref.getDownloadURL()
-            url.value = getDownloadURL(ref(projectStorage, firebaseFilePath.value))
+            // url.value = await res.ref.getDownloadURL()
+
+            url.value = await getDownloadURL(ref(projectStorage, firebaseFilePath.value))
                 .then((url) => {
-                    console.log(url);
+                    console.log('fuck yeah! -> ', url);
+                    return url
                 })
+
 
             if (!res) {
                 throw new Error('Could not login')
