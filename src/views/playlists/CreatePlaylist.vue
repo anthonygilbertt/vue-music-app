@@ -17,7 +17,8 @@
       <label>Upload Playlist Cover Image</label>
       <input type="file" name="" id="" @change="handleFileChange" />
       <div class="error">{{ fileError }}</div>
-      <button>Create</button>
+      <button v-if="isPending == true" disabled>Loading...</button>
+      <button v-else>Create</button>
     </form>
   </div>
 </template>
@@ -36,10 +37,11 @@ export default {
     const description = ref("");
     const file = ref(null);
     const fileError = ref(null);
+    let isPending = ref(false);
 
     const { firebaseFilePath, url, uploadImage } = useStorage();
     //  ------
-    const { error, addDoc, isPending } = useCollection("playlist");
+    const { error, addDoc } = useCollection("playlist");
     const { user } = getUser();
     //  ------
 
@@ -47,11 +49,11 @@ export default {
     const handleFileUpload = async () => {
       // we don't want to submit the form if we don't have a value
       if (file.value) {
+        isPending.value = true;
         try {
           console.log(title.value, description.value, file.value);
           await uploadImage(file.value);
           console.log("image uploaded, url: ", url.value);
-
           await addDoc({
             title: title.value,
             description: description.value,
@@ -63,8 +65,10 @@ export default {
             createdAt: timestamp(),
           });
           if (!error.value) console.log("playlist added");
+          isPending.value = false;
         } catch (error) {
           console.log(error.message);
+          isPending.value = false;
         }
       }
     };
@@ -93,6 +97,7 @@ export default {
       error,
       handleFileChange,
       fileError,
+      isPending,
     };
   },
 };
