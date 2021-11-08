@@ -3,16 +3,12 @@
     <div v-if="error">{{ error }}</div>
     <div v-if="documents" class="playlist" ref="playlist">
       <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
-        <!--
-      -->
         <div class="thumbnail">
           <img :src="doc.coverURL" alt="" />
         </div>
         <div class="info">
-          <p class="title">Title: {{ doc.title }}</p>
+          <h3>Title: {{ doc.title }}</h3>
           <p class="description">Description: {{ doc.description }}</p>
-          <p class="coverURL">URL: {{ doc.coverURL }}</p>
-          <span class="created-at">Created {{ doc.createdAt }} ago</span>
           <span class="created-at">Created By: {{ doc.userName }}</span>
         </div>
         <div class="song-number">Songs: {{ doc.songs.length }}</div>
@@ -57,25 +53,35 @@ export default {
 </script>
 
 <style scoped>
-.playlist-window {
-  background: #fafafa;
-  padding: 30px 20px;
-}
 .single {
-  margin: 18px 0;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  margin: 16px 0;
+  transition: all ease 0.2s;
 }
-.created-at {
+.single:hover {
+  box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
+  transform: scale(1.02);
+  transition: all ease 0.2s;
+}
+.thumbnail {
+  max-width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+img {
+  max-width: 150%;
+  max-height: 150%;
   display: block;
-  color: #999;
-  font-size: 12px;
-  margin-bottom: 4px;
 }
-.name {
-  font-weight: bold;
-  margin-right: 6px;
+.info {
+  margin: 0 30px;
 }
-.playlist {
-  max-height: 400px;
-  overflow: auto;
+.song-number {
+  margin-left: auto;
 }
 </style>
