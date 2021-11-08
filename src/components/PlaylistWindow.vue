@@ -3,15 +3,17 @@
     <div v-if="error">{{ error }}</div>
     <div v-if="documents" class="playlist" ref="playlist">
       <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
-        <div class="thumbnail">
-          <img :src="doc.coverURL" alt="" />
-        </div>
-        <div class="info">
-          <h3>Title: {{ doc.title }}</h3>
-          <p class="description">Description: {{ doc.description }}</p>
-          <span class="created-at">Created By: {{ doc.userName }}</span>
-        </div>
-        <div class="song-number">Songs: {{ doc.songs.length }}</div>
+        <router-link :to="{ name: 'PlaylistDetails', params: { id: doc.id } }">
+          <div class="thumbnail">
+            <img :src="doc.coverURL" alt="" />
+          </div>
+          <div class="info">
+            <h3>Title: {{ doc.title }}</h3>
+            <p class="description">Description: {{ doc.description }}</p>
+            <span class="created-at">Created By: {{ doc.userName }}</span>
+          </div>
+          <div class="song-number">Songs: {{ doc.songs.length }}</div>
+        </router-link>
       </div>
     </div>
   </div>
