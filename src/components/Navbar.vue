@@ -8,6 +8,10 @@
 
         <!-- Logged In -->
         <div v-if="user">
+          <router-link :to="{ name: 'CreatePlaylist' }"
+            >Create Playlist</router-link
+          >
+
           <button @click="handleLogout">Logout</button>
         </div>
 
