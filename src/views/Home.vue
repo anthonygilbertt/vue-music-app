@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <p>Playlists</p>
+    <p>Home Page</p>
     <PlaylistWindow />
   </div>
 </template>

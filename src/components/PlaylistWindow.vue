@@ -1,12 +1,21 @@
 <template>
   <div class="playlist-window">
     <div v-if="error">{{ error }}</div>
-    <div v-if="documents" class="playlists" ref="playlists">
+    <div v-if="documents" class="playlist" ref="playlist">
       <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
-        <span class="created-at">{{ doc.createdAt }}</span>
-        <span class="title">{{ doc.title }}</span>
-        <span class="description">{{ doc.description }}</span>
-        <span class="coverURL">{{ doc.coverURL }}</span>
+        <!--
+      -->
+        <div class="thumbnail">
+          <img :src="doc.coverURL" alt="" />
+        </div>
+        <div class="info">
+          <p class="title">Title: {{ doc.title }}</p>
+          <p class="description">Description: {{ doc.description }}</p>
+          <p class="coverURL">URL: {{ doc.coverURL }}</p>
+          <span class="created-at">Created {{ doc.createdAt }} ago</span>
+          <span class="created-at">Created By: {{ doc.userName }}</span>
+        </div>
+        <div class="song-number">Songs: {{ doc.songs.length }}</div>
       </div>
     </div>
   </div>
@@ -15,36 +24,13 @@
 <script>
 import getCollection from "@/composables/getCollection";
 import { formatDistanceToNow } from "date-fns";
-import { computed, ref as vref } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 import { onUpdated } from "@vue/runtime-core";
-// import { getStorage, ref, listAll } from "firebase/storage";
-import { getStorage, ref } from "firebase/storage";
-import { projectStorage } from "../firebase/config";
 
 export default {
   setup() {
     const { error, documents } = getCollection("playlist");
-    // TODO -- Get the
-
-    const projectStorage = getStorage();
-
-    // // Create a reference under which you want to list
-    // const listRef = ref(projectStorage, "files/uid");
-
-    // // Find all the prefixes and items.
-    // listAll(listRef)
-    //   .then((res) => {
-    //     res.prefixes.forEach((folderRef) => {
-    //       // All the prefixes under listRef.
-    //       // You may call listAll() recursively on them.
-    //     });
-    //     res.items.forEach((itemRef) => {
-    //       // All the items under listRef.
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     // Uh-oh, an error occurred!
-    //   });
+    console.log("documents: ", documents.value);
 
     const formattedDocuments = computed(() => {
       // First we cant to see if there are documents to cycle through
@@ -59,14 +45,13 @@ export default {
     onUpdated(() => {
       // we want to scroll to the bottom whenever the component updates
       console.log("component has been updated");
-      playlists.value.scrollTop = playlists.value.scrollHeight;
+      // playlist.value.scrollTop = playlist.value.scrollHeight;
     });
 
-    // auto-scroll to bottom of playlists
-    const playlists = vref(null);
+    // auto-scroll to bottom of playlist
+    const playlist = ref(null);
 
-    return { error, documents, formattedDocuments, playlists };
-    // return { error, documents };
+    return { error, documents, formattedDocuments, playlist };
   },
 };
 </script>
@@ -85,11 +70,11 @@ export default {
   font-size: 12px;
   margin-bottom: 4px;
 }
-.title {
+.name {
   font-weight: bold;
   margin-right: 6px;
 }
-.playlists {
+.playlist {
   max-height: 400px;
   overflow: auto;
 }
