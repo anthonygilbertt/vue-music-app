@@ -4,7 +4,7 @@
     <!-- playlist information -->
     <div class="playlist-info">
       <div class="cover">
-        <img :src="playlist.coverUrl" />
+        <img :src="playlist.coverURL" />
       </div>
       <h2>{{ playlist.title }}</h2>
       <p class="username">Created by {{ playlist.userName }}</p>
@@ -34,6 +34,7 @@ export default {
     console.log("user: ", user);
     const ownership = computed(() => {
       console.log("user.uid: ", user.uid);
+      console.log("playlist: ", playlist.value.coverURL);
       console.log("playlist.value.userId: ", playlist.value.userId);
       console.log("user: ", user);
       return (
