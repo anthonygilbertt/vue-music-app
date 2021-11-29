@@ -1,18 +1,31 @@
-import { ref } from 'vue'
-import { projectAuth } from '../firebase/config'
-
-// refs
-const user = ref(projectAuth.currentUser)
-
-// listen for auth changes outside of function
-// so only 1 listener is ever attached
-projectAuth.onAuthStateChanged(_user => {
-    console.log('User state change. Current user is:', _user)
-    user.value = _user
-});
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const getUser = () => {
+    const auth = getAuth();
+    const user = auth.currentUser
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            console.log('uid: ', uid);
+            return uid
+        } else {
+            // User is signed out
+            // ...
+        }
+    });
+
     return { user }
 }
+
+
+// auth changes
+// projectAuth.onAuthStateChanged(_user => {
+//     console.log('User state change. Current user is:', _user)
+//     return user.value = _user
+// });
+
 
 export default getUser

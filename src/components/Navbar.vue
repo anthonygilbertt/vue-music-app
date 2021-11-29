@@ -45,7 +45,7 @@ export default {
 
     const { user } = getUser();
 
-    if ((user.value = null)) {
+    if (user == null) {
       isLoggedIn.value = false;
     } else {
       isLoggedIn.value = true;

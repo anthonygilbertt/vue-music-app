@@ -1,15 +1,17 @@
 <template>
-  <div v-if="error" class="error">{{ error }}</div>
+  <div class="error" v-if="error">{{ error }}</div>
   <div v-if="playlist" class="playlist-details">
+    <!-- playlist information -->
     <div class="playlist-info">
       <div class="cover">
-        <img :src="playlist.coverURL" alt="" />
+        <img :src="playlist.coverUrl" />
       </div>
       <h2>{{ playlist.title }}</h2>
-
-      <p class="username">Created by: {{ playlist.userName }}</p>
-      <p class="description">Description: {{ playlist.description }}</p>
+      <p class="username">Created by {{ playlist.userName }}</p>
+      <p class="description">{{ playlist.description }}</p>
+      <button v-if="ownership">Delete Playlist</button>
     </div>
+
     <!-- song list -->
     <div class="song-list">
       <p>song list here</p>
@@ -18,29 +20,31 @@
 </template>
 
 <script>
-import { watchEffect } from "vue";
-import { useRoute } from "vue-router";
-import getDocument from "@/composables/getDocument.js";
+import getDocument from "@/composables/getDocument";
+import getUser from "@/composables/getUser";
+import { computed } from "vue";
 
 export default {
   props: ["id"],
   setup(props) {
-    const route = useRoute();
     const { error, document: playlist } = getDocument("playlist", props.id);
-    console.clear();
+    // const { user } = getUser();
+    const { user } = getUser();
 
-    console.log("playlist: ", playlist);
-    watchEffect(() => console.log(playlist));
-    console.log("playlist.title: ", playlist.title);
+    console.log("user: ", user);
+    const ownership = computed(() => {
+      console.log("user.uid: ", user.uid);
+      console.log("playlist.value.userId: ", playlist.value.userId);
+      console.log("user: ", user);
+      return (
+        // playlist.value && user.value && user.value.uid == playlist.value.userId
+        // user
+        playlist.value && user.uid && user.uid == playlist.value.userId
+        // playlist.value.userId
+      );
+    });
 
-    // let myTarget = JSON.parse(JSON.stringify(document._rawValue.coverURL));
-
-    // console.log("document._rawValue.coverURL: ", myTarget);
-
-    console.log("route: ", route.path);
-    console.log("route: ", route);
-    const path = route.path;
-    return { path, playlist };
+    return { error, playlist, ownership };
   },
 };
 </script>

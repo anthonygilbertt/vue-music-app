@@ -13,7 +13,7 @@ const useStorage = () => {
 
     const uploadImage = async(file) => {
 
-        firebaseFilePath.value = `covers/${user.value.uid}/${file.name}`;
+        firebaseFilePath.value = `covers/${user.uid}/${file.name}`;
         console.log('firebaseFilePath.value: ', firebaseFilePath.value);
 
         const projectStorage = getStorage();

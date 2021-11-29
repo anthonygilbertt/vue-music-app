@@ -57,8 +57,8 @@ export default {
           const res = await addDoc({
             title: title.value,
             description: description.value,
-            userId: user.value.uid,
-            userName: user.value.displayName,
+            userId: user.uid,
+            userName: user.displayName,
             coverURL: url.value,
             firebaseFilePath: firebaseFilePath.value,
             songs: [],

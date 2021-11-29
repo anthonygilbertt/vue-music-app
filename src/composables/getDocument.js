@@ -17,6 +17,7 @@ const getDocument = (collection, id) => {
     const unsub = documentRef.onSnapshot(snap => {
         if (snap.data()) {
             document.value = {...snap.data(), id: snap.id }
+            console.log('document.value: ', document.value);
             error.value = null
         } else {
             error.value = 'That document does not exist.'
