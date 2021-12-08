@@ -22,23 +22,29 @@
 <script>
 import getDocument from "@/composables/getDocument";
 import useDocument from "@/composables/useDocument";
+import useStorage from "@/composables/useStorage";
 import getUser from "@/composables/getUser";
 import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   props: ["id"],
   setup(props) {
     const { error, document: playlist } = getDocument("playlist", props.id);
     const { deleteDocument } = useDocument("playlist", props.id);
+    const { deleteImage } = useStorage();
     // const { user } = getUser();
     const { user } = getUser();
+    const route = useRoute();
 
     console.log("user: ", user);
+
     const ownership = computed(() => {
       console.log("user.uid: ", user.uid);
       console.log("playlist: ", playlist.value.coverURL);
       console.log("playlist.value.userId: ", playlist.value.userId);
       console.log("user: ", user);
+
       return (
         // playlist.value && user.value && user.value.uid == playlist.value.userId
         // user
@@ -49,6 +55,10 @@ export default {
 
     const deletePlaylist = async () => {
       console.log("button clicked");
+      console.log("route: ", route);
+      console.log("playlist: ", playlist);
+
+      await deleteImage(playlist.value.firebaseFilePath);
       await deleteDocument();
     };
 
