@@ -56,29 +56,11 @@ const useStorage = () => {
     await deleteObject(imagePath)
       .then(() => {
         console.log("File deleted successfully");
-        // File deleted successfully
       })
       .catch((error) => {
         console.log("error: ", error.message);
         console.log("Uh-oh, an error occurred!");
       });
-    // tutorials solution
-
-    //Docs Solution
-
-    // const projectStorage = getStorage();
-
-    // const storageRef = projectStorage.ref(path);
-    // Create a reference to the file to delete
-    // const storageRef = ref(projectStorage, path);
-    // const imagePath = storageRef.child(path);
-
-    // Delete the file
-    // deleteObject(storageRef)
-    //   .then(() => {
-    //   })
-    //   .catch((error) => {
-    //   });
   };
   error.value = null;
 

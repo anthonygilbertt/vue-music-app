@@ -14,7 +14,15 @@
 
     <!-- song list -->
     <div class="song-list">
-      <p>song list here</p>
+      <div v-if="!playlist.songs.length">No songs have been added yet</div>
+      <div v-for="song in playlist.songs" :key="song.id" class="single-song">
+        <div class="details">
+          <h3>{{ song.title }}</h3>
+          <p>{{ song.artist }}</p>
+        </div>
+        <button v-if="ownership">Delete</button>
+      </div>
+      <AddSong v-if="ownership" :playlist="playlist" />
     </div>
   </div>
 </template>
@@ -23,21 +31,21 @@
 import getDocument from "@/composables/getDocument";
 import useDocument from "@/composables/useDocument";
 import useStorage from "@/composables/useStorage";
+import AddSong from "@/components/AddSong.vue";
 import getUser from "@/composables/getUser";
-import { computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
-  props: ["id"],
+  components: { AddSong },
+  props: ["id", "playlist"],
   setup(props) {
     const { error, document: playlist } = getDocument("playlist", props.id);
     const { deleteDocument } = useDocument("playlist", props.id);
     const { deleteImage } = useStorage();
-    // const { user } = getUser();
     const { user } = getUser();
-    const route = useRoute();
-
-    console.log("user: ", user);
+    const router = useRouter();
+    const songs = ref(false);
 
     const ownership = computed(() => {
       console.log("user.uid: ", user.uid);
@@ -45,21 +53,14 @@ export default {
       console.log("playlist.value.userId: ", playlist.value.userId);
       console.log("user: ", user);
 
-      return (
-        // playlist.value && user.value && user.value.uid == playlist.value.userId
-        // user
-        playlist.value && user.uid && user.uid == playlist.value.userId
-        // playlist.value.userId
-      );
+      return playlist.value && user.uid && user.uid == playlist.value.userId;
     });
 
     const deletePlaylist = async () => {
-      console.log("button clicked");
-      console.log("route: ", route);
-      console.log("playlist: ", playlist);
-
       await deleteImage(playlist.value.firebaseFilePath);
       await deleteDocument();
+
+      router.push({ name: "Home" });
     };
 
     return { error, playlist, ownership, deletePlaylist };
@@ -105,5 +106,13 @@ export default {
 }
 .description {
   text-align: left;
+}
+.single-song {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--secondary);
+  margin-bottom: 20px;
 }
 </style>
