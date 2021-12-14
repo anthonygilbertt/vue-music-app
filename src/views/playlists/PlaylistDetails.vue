@@ -20,7 +20,9 @@
           <h3>{{ song.title }}</h3>
           <p>{{ song.artist }}</p>
         </div>
-        <button v-if="ownership">Delete</button>
+        <button v-if="ownership" @click="deleteSingleSong(song.id)">
+          Delete
+        </button>
       </div>
       <AddSong v-if="ownership" :playlist="playlist" />
     </div>
@@ -35,13 +37,17 @@ import AddSong from "@/components/AddSong.vue";
 import getUser from "@/composables/getUser";
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+import { deleteObject } from "firebase/storage";
 
 export default {
   components: { AddSong },
   props: ["id", "playlist"],
   setup(props) {
     const { error, document: playlist } = getDocument("playlist", props.id);
-    const { deleteDocument } = useDocument("playlist", props.id);
+    const { deleteDocument, updateDocument } = useDocument(
+      "playlist",
+      props.id
+    );
     const { deleteImage } = useStorage();
     const { user } = getUser();
     const router = useRouter();
@@ -63,7 +69,15 @@ export default {
       router.push({ name: "Home" });
     };
 
-    return { error, playlist, ownership, deletePlaylist };
+    const deleteSingleSong = async (id) => {
+      console.log("deleting song");
+
+      // if they are not equal, we want to keep the song in the array
+      const songs = playlist.value.songs.filter((song) => song.id != id);
+      await updateDocument({ songs: songs });
+    };
+
+    return { error, playlist, ownership, deletePlaylist, deleteSingleSong };
   },
 };
 </script>

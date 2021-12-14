@@ -24,6 +24,7 @@ const useDocument = (collection, id) => {
     }
   };
 
+  //  'updates' is an object
   const updateDocument = async (updates) => {
     isPending.value = true;
     error.value = null;

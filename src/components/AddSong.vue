@@ -3,16 +3,10 @@
     <button v-if="!toggleShowForm" @click="toggleShowForm = true">
       Add Songs
     </button>
-    <form v-if="toggleShowForm == true" @click.prevent="handleSubmit">
+    <form v-if="toggleShowForm == true" @submit.prevent="handleSubmit">
       <h4>Add a New Song</h4>
-      <input
-        type="text"
-        placeholder="Song title"
-        required
-        v-model="title"
-        id=""
-      />
-      <input type="text" placeholder="Artist" required v-model="artist" id="" />
+      <input type="text" placeholder="Song title" required v-model="title" />
+      <input type="text" placeholder="Artist" required v-model="artist" />
       <button>Add</button>
     </form>
   </div>
