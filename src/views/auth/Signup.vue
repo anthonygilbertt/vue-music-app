@@ -20,13 +20,13 @@
 
 <script>
 import useSignup from "@/composables/useSignup.js";
-import { useRouter  } from "vue-router";
+import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 export default {
   setup() {
     const { error, signup, isPending } = useSignup();
-const router = useRouter();
+    const router = useRouter();
     const displayName = ref("");
     const email = ref("");
     const password = ref("");
@@ -35,7 +35,7 @@ const router = useRouter();
       const res = await signup(email.value, password.value, displayName.value);
       if (!error.value) {
         console.log("user signed up in");
-        router.push({ name: 'Home' })
+        router.push({ name: "Home" });
       }
     };
 
@@ -44,5 +44,4 @@ const router = useRouter();
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

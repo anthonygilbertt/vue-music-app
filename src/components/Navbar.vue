@@ -11,7 +11,8 @@
           <router-link :to="{ name: 'CreatePlaylist' }"
             >Create Playlist</router-link
           >
-
+          <router-link :to="{ name: 'UserPlaylists' }">My Playlist</router-link>
+          <span>Hello, {{ user.displayName }}</span>
           <button @click="handleLogout">Logout</button>
         </div>
 
@@ -27,16 +28,23 @@
   </div>
 </template>
 
-
 <script>
-// Need to condirionally show the navbar buttons
-//
+/*
+TODO:
+- [X] - Need to conditionally show the navbar buttons
+
+FIXME:
+- [] - Navbar buttons aren't showing unless if the page is refreshing.
+*/
+
 import useLogout from "@/composables/useLogout.js";
 import getUser from "@/composables/getUser.js";
 import { useRouter } from "vue-router";
 import { ref } from "@vue/reactivity";
+import UserPlaylists from "@/views/playlists/UserPlaylists.vue";
 
 export default {
+  components: { UserPlaylists },
   setup() {
     const { logout, error, isPending } = useLogout();
     const router = useRouter();
@@ -91,5 +99,12 @@ nav .links a,
 button {
   margin-left: 16px;
   font-size: 14px;
+}
+span {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid rgb(155, 148, 148);
 }
 </style>

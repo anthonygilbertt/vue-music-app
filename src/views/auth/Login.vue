@@ -30,6 +30,7 @@ export default {
       await login(email.value, password.value);
 
       if (!error.value) {
+        // router.push({ name: "Home" });
         router.push({ name: "Home" });
 
         console.log("user logged in");
@@ -41,5 +42,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
